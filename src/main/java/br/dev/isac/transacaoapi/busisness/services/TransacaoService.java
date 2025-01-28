@@ -29,16 +29,19 @@ public class TransacaoService {
             log.info("Valor não pode ser negativo");
             throw new UnprocessableEntity("Valor não pode ser negativo");
         }
-
+        log.info("Transações adicionadas com sucesso");
         listaTransacoes.add(dto);
     }
 
     public void limparTransacoes() {
+        log.info("Detelando transações com sucesso");
         listaTransacoes.clear();
     }
 
     public List<TransacaoRequestDTO> buscarTransacoes(Integer intervaloBusca) {
+        log.info("Iniadas as buscas de transações por intervalor de tempo "+intervaloBusca+" segundo(s)");
         OffsetDateTime dataHoraIntervalo = OffsetDateTime.now().minusSeconds(intervaloBusca);
+        log.info("Retorno de transações com sucesso");
         return listaTransacoes.stream().filter(transacao -> transacao.dataHora().isAfter(dataHoraIntervalo)).toList();
     }
 }
